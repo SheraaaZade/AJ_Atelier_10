@@ -1,17 +1,20 @@
 package services;
 
 import domain.CompactDisc;
+import domain.CompactDiscImpl;
+import domain.DomainFactory;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class CatalogTest {
+    private DomainFactory factory = new DomainFactory();
 
     @Test
     void cdIsFound() {
         Catalog catalog = new CatalogImpl();
-        CompactDisc cd1 = new CompactDisc("Young Mystic", "Bob Marley", 3, 12,"666-777");
-        CompactDisc cd2 = new CompactDisc("Time Out", "Dave Brubeck Quartet", 10, 111.1, "123-456");
+        CompactDiscImpl cd1 = new CompactDiscImpl("Young Mystic", "Bob Marley", 3, 12,"666-777");
+        CompactDisc cd2 = new CompactDiscImpl("Time Out", "Dave Brubeck Quartet", 10, 111.1, "123-456");
         catalog.initCatalog(cd1, cd2);
         assertAll(
                 () -> assertEquals(1, catalog.findCds("young mystic", "").size()),

@@ -1,6 +1,8 @@
 package acceptance;
 
 import domain.CompactDisc;
+import domain.CompactDiscImpl;
+import domain.DomainFactory;
 import jakarta.ws.rs.client.Client;
 import jakarta.ws.rs.client.ClientBuilder;
 import jakarta.ws.rs.client.WebTarget;
@@ -16,11 +18,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CdApiTest {
     private Catalog defaultCatalog;
+    private DomainFactory factory = new DomainFactory();
     @BeforeEach
     void setUp() {
         defaultCatalog = new CatalogImpl();
-        CompactDisc cd1 = new CompactDisc("Young Mystic", "Bob Marley",3,12,"666-777");
-        CompactDisc cd2 = new CompactDisc("Time Out", "Dave Brubeck Quartet",10,111.1,"123-456");
+        CompactDiscImpl cd1 = new CompactDiscImpl("Young Mystic", "Bob Marley",3,12,"666-777");
+        CompactDisc cd2 = new CompactDiscImpl("Time Out", "Dave Brubeck Quartet",10,111.1,"123-456");
         defaultCatalog.initCatalog(cd1,cd2);
         ApiServer.setApplicationBinder((new AbstractBinder() {
             @Override
@@ -51,5 +54,10 @@ public class CdApiTest {
         String responseBody = target.path(path).queryParam(key, value)
                 .request().get(String.class);
         return responseBody;
+    }
+    @Test
+    void cdNotFoundInCatalog(){
+        String actualResponse = getRequest("cds","title=there once was a song");
+        assertEquals("No cds", actualResponse);
     }
 }

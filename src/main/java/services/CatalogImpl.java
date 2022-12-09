@@ -1,6 +1,7 @@
 package services;
 
 import domain.CompactDisc;
+import domain.CompactDiscImpl;
 
 import java.util.ArrayList;
 import java.util.Arrays;

@@ -20,6 +20,8 @@ public class CdResource {
                           @DefaultValue("") @QueryParam("artist") String artist) {
         System.out.println("find my CD ? " + title + " artist");
         List<CompactDisc> cdsFound = catalog.findCds(title, artist);
+        if(cdsFound.isEmpty())
+            return "No cds";
         String cdsFoundSerialized = cdsFound.stream().map(compactDisc -> compactDisc.toString())
                 .collect(Collectors.joining("\n"));
         return cdsFoundSerialized;
