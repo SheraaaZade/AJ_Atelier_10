@@ -9,7 +9,7 @@ class CatalogTest {
 
     @Test
     void cdIsFound() {
-        Catalog catalog = new Catalog();
+        Catalog catalog = new CatalogImpl();
         CompactDisc cd1 = new CompactDisc("Young Mystic", "Bob Marley", 3, 12,"666-777");
         CompactDisc cd2 = new CompactDisc("Time Out", "Dave Brubeck Quartet", 10, 111.1, "123-456");
         catalog.initCatalog(cd1, cd2);

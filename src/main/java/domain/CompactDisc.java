@@ -21,4 +21,13 @@ public class CompactDisc {
     public String getArtist() {
         return artist;
     }
+
+    @Override
+    public String toString() {
+        return "title:" + title +
+                ", artist:" + artist +
+                ", stock:" + stock +
+                ", price:" + price + "€" +
+                ", id:" + id ;
+    }
 }
